@@ -39,6 +39,17 @@ public class EstudianteServicio {
             return false;
         }
 
+        boolean existeCorreo = estudiantes.stream()
+                .anyMatch(e ->
+                        e.getCorreo().equalsIgnoreCase(
+                                estudiante.getCorreo()
+                        )
+                );
+
+        if (existeCorreo) {
+            return false;
+        }
+
         estudiantes.add(estudiante);
         repositorio.guardar(estudiantes);
 
@@ -53,12 +64,29 @@ public class EstudianteServicio {
 
         List<Estudiante> estudiantes = repositorio.listar();
 
+        boolean correoEnUso = estudiantes.stream()
+                .anyMatch(e ->
+                        e.getId() != estudianteActualizado.getId()
+                        && e.getCorreo().equalsIgnoreCase(
+                                estudianteActualizado.getCorreo()
+                        )
+                );
+
+        if (correoEnUso) {
+            return false;
+        }
+
         for (Estudiante estudiante : estudiantes) {
 
             if (estudiante.getId() == estudianteActualizado.getId()) {
 
-                estudiante.setNombre(estudianteActualizado.getNombre());
-                estudiante.setCorreo(estudianteActualizado.getCorreo());
+                estudiante.setNombre(
+                        estudianteActualizado.getNombre()
+                );
+
+                estudiante.setCorreo(
+                        estudianteActualizado.getCorreo()
+                );
 
                 repositorio.guardar(estudiantes);
 
@@ -104,6 +132,10 @@ public class EstudianteServicio {
             return false;
         }
 
-        return estudiante.getCorreo().contains("@");
+        String expresionCorreo =
+                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+
+        return estudiante.getCorreo()
+                .matches(expresionCorreo);
     }
 }
