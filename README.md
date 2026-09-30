@@ -454,7 +454,7 @@ data/
     "id": 101,
     "nombre": "Arquitectura de Software",
     "creditos": 4,
-    "docente": "Juan Pérez"
+    "docente": "Luis Ruiz"
   }
 ]
 ```
