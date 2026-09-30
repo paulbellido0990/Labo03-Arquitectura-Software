@@ -1,13 +1,12 @@
 package org.example.business;
 
 public class Estudiante {
+
     private int id;
     private String nombre;
     private String correo;
 
-
-    public Estudiante(){
-
+    public Estudiante() {
     }
 
     public Estudiante(int id, String nombre, String correo) {
@@ -20,23 +19,33 @@ public class Estudiante {
         return id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "ID: %-4d | Estudiante: %-25s | Correo: %s",
+                id,
+                nombre,
+                correo
+        );
     }
 }
